@@ -15,9 +15,17 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        UserBuilder userBuilder = User.withDefaultPasswordEncoder(); // дефолтное шифрование паролей
-        auth.inMemoryAuthentication().withUser("Stalin").password("USSR").roles("Vozhd");
-        auth.inMemoryAuthentication().withUser("Lenin").password("Communism").roles("Otec");
-        auth.inMemoryAuthentication().withUser("Trotskiy").password("Revolution").roles("Partiya", "IT");
+
+        auth.inMemoryAuthentication()
+                .withUser(userBuilder.username("Stalin")
+                .password("USSR")
+                .roles("Vozhd"))
+        .withUser(userBuilder.username("Lenin")
+                .password("Communism")
+                .roles("HR"))
+        .withUser(userBuilder.username("Trotskiy")
+                .password("Revolution")
+                .roles("MANAGER", "IT"));
 
     }
 }
